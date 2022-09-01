@@ -1,0 +1,98 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+
+type Query {
+  "The full list of movies available on Apollo Flix"
+  movies(ids: [ID!]): [Media!]!
+  "A specific movie by different filters"
+  movie(id: ID, title: String, releaseYear: Int): Media
+  "The full list of tv shows available on Apollo Flix"
+  tvShows: [Media!]!
+  "A specific TV show by different filter"
+  tvShow(id: ID, title: String, releaseYear: Int): Media
+  "Search by category"
+  searchByCategory(category: MediaCategory): [Media!]
+}
+
+type Media {
+  id: ID!
+  "The type of media"
+  type: MediaType!
+  "The title of media"
+  title: String!
+  "The director"
+  director: String!
+  "Country the media was released in"
+  country: String!
+  "Date media became available"
+  dateAdded: String!
+  "Year media was released"
+  releaseYear: Int!
+  "Parental rating of movie or show"
+  rating: ProgramRating!
+  "Duration of Content"
+  duration: String!
+  "Where content is available in"
+  category: [MediaCategory]
+}
+
+enum MediaCategory {
+  DOCUMENTARIES
+  CRIME_TV_SHOWS
+  INTERNATIONAL_TV_SHOWS
+  TV_ACTION_ADVENTURE
+  TV_DRAMAS
+  TV_HORROR
+  TV_MYSTERIES
+  CHILDREN_FAMILY_MOVIES
+  COMEDIES
+  DRAMAS
+  INDEPENDENT_MOVIES
+  INTERNATIONAL_MOVIES
+  BRITISH_TV_SHOWS
+  REALITY_TV
+  MUSIC_MUSICALS
+  MOVIES
+  DOCUSERIES
+  KIDS_TV
+  ROMANTIC_MOVIES
+  HORROR_MOVIES
+  SCI_FI_FANTASY
+  THRILLERS
+  SPANISH_LANGUAGE_TV_SHOWS
+  TV_COMEDIES
+  TV_THRILLERS
+  ANIME_SERIES
+  KOREAN_TV_SHOWS
+  ROMANTIC_TV_SHOWS
+  ACTION_ADVENTURE
+  CLASSIC_MOVIES
+  ANIME_FEATURES
+  TEEN_TV_SHOWS
+  STAND_UP_COMEDY_TALK_SHOWS
+  SPORTS_MOVIES
+  SCIENCE_NATURE_TV
+  CULT_MOVIES
+  STAND_UP_COMEDY
+  FAITH_SPIRITUALITY
+  LGBTQ_MOVIES
+  TV_SCI_FI_FANTASY
+  TV_SHOWS
+  CLASSIC_CULT_TV
+}
+
+enum MediaType {
+  TV_SHOW
+  MOVIES
+}
+
+enum ProgramRating {
+  TV_MA
+  TV_Y
+  TV_Y7
+  TV_PG
+  R
+  TV_14
+  TV_Y7F7
+}
